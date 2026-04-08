@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary */
+  --color-primary: #0058A3;
+  --color-primary-deep: #003E72;
+  --color-primary-light: #E0EFF9;
+
+  /* Accent */
+  --color-accent: #FFDB00;
+  --color-accent-warm: #FFC800;
+  --color-accent-pale: #FFF8D6;
+
+  /* Sand */
+  --color-sand-50: #FDFBF7;
+  --color-sand-100: #F5F0E8;
+  --color-sand-200: #E8DFD0;
+  --color-sand-300: #D4C7B0;
+  --color-sand-400: #B8A686;
+
+  /* Gray */
+  --color-gray-50: #F8F7F5;
+  --color-gray-100: #EDEAE5;
+  --color-gray-200: #D8D3CB;
+  --color-gray-300: #B0A999;
+  --color-gray-400: #8A826F;
+  --color-gray-500: #6B6354;
+  --color-gray-600: #4A4438;
+  --color-gray-700: #2C2822;
+  --color-gray-800: #1A1714;
+
+  /* Status */
+  --color-status-good: #2D8544;
+  --color-status-good-bg: #E8F5EC;
+  --color-status-warning: #C27200;
+  --color-status-warning-bg: #FFF3E0;
+  --color-status-critical: #C4314B;
+  --color-status-critical-bg: #FCE8EC;
+  --color-status-info: #0058A3;
+  --color-status-info-bg: #E0EFF9;
+  --color-status-success: #2D8544;
+  --color-status-success-bg: #E8F5EC;
+
+  /* Fonts */
+  --font-display: 'Bricolage Grotesque', serif;
+  --font-body: 'Instrument Sans', sans-serif;
+
+  /* Animations */
+  --animate-slide-up: slideUp 0.5s ease forwards;
+  --animate-fade-in: fadeIn 0.15s ease;
+  --animate-dropdown-in: dropdownIn 0.15s ease;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-sand-50);
+  color: var(--color-gray-700);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-sand-300); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gray-400); }

@@ -1,0 +1,14 @@
+{
+  "name": "admin-sandbox",
+  "private": true,
+  "scripts": {
+    "dev:react": "pnpm --filter @admin-sandbox/react-spa dev",
+    "dev:nextjs": "pnpm --filter @admin-sandbox/nextjs dev",
+    "dev:shadcn": "pnpm --filter @admin-sandbox/shadcn dev",
+    "build": "pnpm -r build",
+    "build:react": "pnpm --filter @admin-sandbox/react-spa build",
+    "build:nextjs": "pnpm --filter @admin-sandbox/nextjs build",
+    "build:shadcn": "pnpm --filter @admin-sandbox/shadcn build",
+    "lint": "pnpm -r lint"
+  }
+}
