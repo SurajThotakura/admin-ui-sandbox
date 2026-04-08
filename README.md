@@ -1,4 +1,4 @@
-# Admin Sandbox
+# Admin UI Sandbox
 
 Test how well AI agents can implement and customize UI component libraries to look consistent with an existing app.
 
