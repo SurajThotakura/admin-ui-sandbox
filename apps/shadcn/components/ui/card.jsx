@@ -28,7 +28,7 @@ export function CardHeader({ className, children, ...props }) {
 export function CardTitle({ className, children, ...props }) {
   return (
     <div
-      className={cn("text-base font-bold tracking-tight", className)}
+      className={cn("text-base font-bold tracking-[-0.2px]", className)}
       style={{ fontFamily: "var(--font-display)", color: "var(--color-gray-800)" }}
       {...props}
     >

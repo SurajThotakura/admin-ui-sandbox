@@ -185,7 +185,7 @@ function AddProductModal({ open, onClose, onAdd }) {
           style={{ borderColor: "var(--color-sand-100)" }}
         >
           <h2
-            className="text-lg font-bold tracking-tight"
+            className="text-lg font-bold tracking-[-0.2px]"
             style={{ fontFamily: "var(--font-display)", color: "var(--color-gray-800)" }}
           >
             Add Product

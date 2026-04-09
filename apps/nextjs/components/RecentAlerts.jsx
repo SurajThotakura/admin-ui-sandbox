@@ -11,57 +11,40 @@ const dotColors = {
 
 export default function RecentAlerts() {
   return (
-    <div
-      className="bg-white relative overflow-hidden animate-slide-up opacity-0"
-      style={{
-        boxShadow: "0 0 0 1px var(--color-sand-200)",
-        animationDelay: "0.4s",
-        animationFillMode: "forwards",
-      }}
-    >
-      <div
-        className="absolute top-0 left-0 bottom-0 w-[3px] opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none"
-        style={{ background: "var(--color-accent)" }}
-      />
-
-      <div className="flex items-center justify-between p-6 pb-0">
+    <div className="card" style={{ animation: "slideUp 0.5s ease forwards", animationDelay: "0.4s", opacity: 0 }}>
+      <div className="card-header">
         <div>
-          <div
-            className="text-base font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-display)", color: "var(--color-gray-800)" }}
-          >
-            Recent Alerts
-          </div>
-          <div className="text-xs mt-0.5" style={{ color: "var(--color-gray-300)" }}>
-            Latest system notifications
-          </div>
+          <div className="card-title">Recent Alerts</div>
+          <div className="card-subtitle">Latest system notifications</div>
         </div>
-        <button
-          className="text-xs font-semibold px-2.5 py-1 transition-colors duration-150 cursor-pointer border-none bg-transparent"
-          style={{ color: "var(--color-primary)", fontFamily: "var(--font-body)" }}
-        >
-          View all
-        </button>
+        <button className="card-action">View all</button>
       </div>
-
-      <div className="flex flex-col gap-2 px-6 pb-6 pt-2">
+      <div style={{ padding: "8px 24px 24px", display: "flex", flexDirection: "column", gap: 8 }}>
         {recentAlerts.map((a) => (
           <div
             key={a.id}
-            className="flex gap-4 p-4 cursor-pointer transition-all duration-150"
-            style={{ background: "var(--color-sand-50)" }}
+            style={{
+              display: "flex",
+              gap: 16,
+              padding: 16,
+              background: "var(--color-sand-50)",
+              cursor: "pointer",
+              transition: "transform 0.15s ease, box-shadow 0.15s ease",
+            }}
           >
             <div
-              className={`w-2 h-2 shrink-0 mt-[5px] ${a.type === "critical" ? "animate-pulse-glow" : ""}`}
-              style={{ background: dotColors[a.type] }}
+              style={{
+                width: 8,
+                height: 8,
+                marginTop: 5,
+                flexShrink: 0,
+                background: dotColors[a.type],
+                animation: a.type === "critical" ? "pulse-glow 1.5s ease-in-out infinite" : undefined,
+              }}
             />
-            <div className="flex-1 min-w-0">
-              <div className="text-[13px] leading-[1.4]" style={{ color: "var(--color-gray-700)" }}>
-                {a.message}
-              </div>
-              <div className="text-[11px] mt-0.5" style={{ color: "var(--color-gray-300)" }}>
-                {a.time}
-              </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 13, color: "var(--color-gray-700)", lineHeight: 1.4 }}>{a.message}</div>
+              <div style={{ fontSize: 11, color: "var(--color-gray-300)", marginTop: 2 }}>{a.time}</div>
             </div>
           </div>
         ))}

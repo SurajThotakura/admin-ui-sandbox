@@ -7,7 +7,6 @@ import {
   Users,
   Bell,
 } from "lucide-react";
-import { Button } from "./ui/button";
 
 const navItems = [
   { section: "Overview" },
@@ -22,52 +21,97 @@ const navItems = [
 
 export default function Sidebar({ activePage, onNavigate }) {
   return (
-    <aside
-      className="fixed top-0 left-0 bottom-0 w-[260px] flex flex-col overflow-hidden z-[100]"
-      style={{ background: "var(--color-primary-deep)", color: "white" }}
-    >
+    <aside className="sidebar">
       {/* Stripe overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
         style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
           background:
             "repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255,255,255,0.02) 48px, rgba(255,255,255,0.02) 49px)",
         }}
       />
 
       {/* Logo */}
-      <div className="relative flex items-center gap-4 px-6 py-6 border-b border-white/[0.08]">
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+          padding: 24,
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
         <div
-          className="w-[42px] h-[42px] flex items-center justify-center shrink-0 text-lg font-extrabold tracking-tight"
           style={{
+            width: 42,
+            height: 42,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             background: "var(--color-accent)",
             color: "var(--color-primary-deep)",
             fontFamily: "var(--font-display)",
+            fontWeight: 800,
+            fontSize: 18,
+            letterSpacing: "-0.5px",
+            flexShrink: 0,
           }}
         >
           AS
         </div>
-        <div className="flex flex-col">
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <span
-            className="text-[17px] font-bold leading-tight tracking-wide"
-            style={{ fontFamily: "var(--font-display)" }}
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              fontSize: 17,
+              letterSpacing: "0.5px",
+              lineHeight: 1.2,
+            }}
           >
             Admin Sandbox
           </span>
-          <span className="text-[11px] opacity-50 uppercase tracking-[1.5px] mt-0.5">
+          <span
+            style={{
+              fontSize: 11,
+              opacity: 0.5,
+              textTransform: "uppercase",
+              letterSpacing: "1.5px",
+              marginTop: 2,
+            }}
+          >
             Admin Portal
           </span>
         </div>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 flex flex-col gap-0.5 p-4 px-2 overflow-y-auto">
+      <nav
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          padding: "16px 8px",
+          overflowY: "auto",
+        }}
+      >
         {navItems.map((item, i) => {
           if (item.section) {
             return (
               <div
                 key={i}
-                className="text-[10px] uppercase tracking-[2px] opacity-35 font-semibold px-4 pt-4 pb-2"
+                style={{
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: 2,
+                  opacity: 0.35,
+                  fontWeight: 600,
+                  padding: "16px 16px 8px",
+                }}
               >
                 {item.section}
               </div>
@@ -79,21 +123,49 @@ export default function Sidebar({ activePage, onNavigate }) {
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`
-                relative flex items-center gap-4 w-full text-left px-4 py-2.5
-                text-sm font-medium cursor-pointer transition-all duration-150
-                border-none bg-transparent
-                ${isActive ? "text-white bg-[rgba(255,219,0,0.12)]" : "text-white/65 hover:text-white hover:bg-white/[0.08]"}
-              `}
-              style={{ fontFamily: "var(--font-body)" }}
+              style={{
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+                gap: 16,
+                width: "100%",
+                textAlign: "left",
+                padding: "10px 16px",
+                fontSize: 14,
+                fontWeight: 500,
+                color: isActive ? "white" : "rgba(255,255,255,0.65)",
+                background: isActive ? "rgba(255,219,0,0.12)" : "transparent",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+                fontFamily: "var(--font-body)",
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.color = "white";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.color = "rgba(255,255,255,0.65)";
+                  e.currentTarget.style.background = "transparent";
+                }
+              }}
             >
               {isActive && (
                 <div
-                  className="absolute left-0 top-0 bottom-0 w-1"
-                  style={{ background: "var(--color-accent)" }}
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: 4,
+                    background: "var(--color-accent)",
+                  }}
                 />
               )}
-              <Icon className="w-[18px] h-[18px] shrink-0" style={{ opacity: isActive ? 1 : 0.8 }} />
+              <Icon style={{ width: 18, height: 18, flexShrink: 0, opacity: isActive ? 1 : 0.8 }} />
               {item.label}
             </button>
           );
@@ -101,16 +173,47 @@ export default function Sidebar({ activePage, onNavigate }) {
       </nav>
 
       {/* Footer */}
-      <div className="relative flex items-center gap-4 px-6 py-4 border-t border-white/[0.08]">
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+          padding: "16px 24px",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
         <div
-          className="w-[34px] h-[34px] flex items-center justify-center shrink-0 text-[13px] font-bold bg-white/12"
-          style={{ color: "var(--color-accent)", fontFamily: "var(--font-display)" }}
+          style={{
+            width: 34,
+            height: 34,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgba(255,255,255,0.12)",
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: 13,
+            color: "var(--color-accent)",
+            flexShrink: 0,
+          }}
         >
           JD
         </div>
-        <div className="flex flex-col min-w-0">
-          <span className="text-[13px] font-semibold text-white truncate">Jane Doe</span>
-          <span className="text-[11px] opacity-45">jane@acme.io</span>
+        <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+          <span
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              color: "white",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            Jane Doe
+          </span>
+          <span style={{ fontSize: 11, opacity: 0.45 }}>jane@acme.io</span>
         </div>
       </div>
     </aside>

@@ -6,82 +6,61 @@ export default function TrafficChart() {
   const maxPageViews = Math.max(...trafficData.map((d) => d.pageViews));
 
   return (
-    <div
-      className="bg-white relative overflow-hidden animate-slide-up opacity-0"
-      style={{
-        boxShadow: "0 0 0 1px var(--color-sand-200)",
-        animationDelay: "0.25s",
-        animationFillMode: "forwards",
-      }}
-    >
-      {/* Hover accent bar */}
-      <div
-        className="absolute top-0 left-0 bottom-0 w-[3px] opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none"
-        style={{ background: "var(--color-accent)" }}
-      />
-
-      <div className="flex items-center justify-between p-6 pb-0">
+    <div className="card" style={{ animation: "slideUp 0.5s ease forwards", animationDelay: "0.25s", opacity: 0 }}>
+      <div className="card-header">
         <div>
-          <div
-            className="text-base font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-display)", color: "var(--color-gray-800)" }}
-          >
-            Weekly Activity
-          </div>
-          <div className="text-xs mt-0.5" style={{ color: "var(--color-gray-300)" }}>
-            Users & page views — last 7 days
-          </div>
+          <div className="card-title">Weekly Activity</div>
+          <div className="card-subtitle">Users & page views — last 7 days</div>
         </div>
-        <button
-          className="text-xs font-semibold px-2.5 py-1 transition-colors duration-150 cursor-pointer border-none bg-transparent hover:bg-primary-light"
-          style={{ color: "var(--color-primary)", fontFamily: "var(--font-body)" }}
-        >
-          View details
-        </button>
+        <button className="card-action">View details</button>
       </div>
-
-      <div className="p-6 pt-4">
-        <div className="flex items-end gap-2 h-[180px] pt-4">
+      <div style={{ padding: "16px 24px 24px" }}>
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 180, paddingTop: 16 }}>
           {trafficData.map((d, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-2 h-full">
-              <div className="flex-1 w-full flex items-end gap-[3px] justify-center">
+            <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 8, height: "100%" }}>
+              <div style={{ flex: 1, width: "100%", display: "flex", alignItems: "flex-end", gap: 3, justifyContent: "center" }}>
                 <div
-                  className="w-4 cursor-pointer transition-all duration-300 hover:brightness-110"
                   style={{
+                    width: 16,
                     height: `${(d.visitors / maxPageViews) * 100}%`,
                     background: "var(--color-primary)",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
                   }}
                   title={`${(d.visitors / 1000).toFixed(0)}K visitors`}
                 />
                 <div
-                  className="w-4 cursor-pointer transition-all duration-300 hover:brightness-110"
                   style={{
+                    width: 16,
                     height: `${(d.pageViews / maxPageViews) * 100}%`,
                     background: "var(--color-accent)",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
                   }}
                   title={`${(d.pageViews / 1000).toFixed(0)}K page views`}
                 />
               </div>
-              <span
-                className="text-[11px] font-semibold text-center"
-                style={{ color: "var(--color-gray-400)" }}
-              >
+              <span style={{ fontSize: 11, fontWeight: 600, color: "var(--color-gray-400)", textAlign: "center" }}>
                 {d.day}
               </span>
             </div>
           ))}
         </div>
-
         <div
-          className="flex gap-6 pt-4 mt-4 border-t"
-          style={{ borderColor: "var(--color-sand-100)" }}
+          style={{
+            display: "flex",
+            gap: 24,
+            paddingTop: 16,
+            borderTop: "1px solid var(--color-sand-100)",
+            marginTop: 16,
+          }}
         >
-          <div className="flex items-center gap-2 text-xs" style={{ color: "var(--color-gray-500)" }}>
-            <div className="w-2.5 h-2.5" style={{ background: "var(--color-primary)" }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--color-gray-500)" }}>
+            <div style={{ width: 10, height: 10, background: "var(--color-primary)" }} />
             Visitors
           </div>
-          <div className="flex items-center gap-2 text-xs" style={{ color: "var(--color-gray-500)" }}>
-            <div className="w-2.5 h-2.5" style={{ background: "var(--color-accent)" }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--color-gray-500)" }}>
+            <div style={{ width: 10, height: 10, background: "var(--color-accent)" }} />
             Page Views
           </div>
         </div>

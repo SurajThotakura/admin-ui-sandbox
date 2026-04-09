@@ -1,45 +1,31 @@
 "use client";
 
 import { siteHealthMetrics } from "../data/mockData";
-import { Card, CardHeader, CardTitle, CardDescription, CardAction } from "./ui/card";
 
-const barWidths = {
-  "99.97%": 99.97, "1.8s": 64, "0.12%": 96,
-  "94.2%": 94.2, "142ms": 82, "68.4%": 31.6,
-};
-
-const statusColor = {
-  good: "var(--color-status-good)",
-  warning: "var(--color-status-warning)",
-  critical: "var(--color-status-critical)",
-};
+const barWidths = { "99.97%": 99.97, "1.8s": 64, "0.12%": 96, "94.2%": 94.2, "142ms": 82, "68.4%": 31.6 };
+const statusColor = { good: "var(--color-status-good)", warning: "var(--color-status-warning)", critical: "var(--color-status-critical)" };
 
 export default function SiteHealth() {
   return (
-    <Card className="animate-slide-up opacity-0" style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}>
-      <CardHeader>
+    <div className="card" style={{ animation: "slideUp 0.5s ease forwards", animationDelay: "0.25s", opacity: 0 }}>
+      <div className="card-header">
         <div>
-          <CardTitle>Site Health</CardTitle>
-          <CardDescription>Performance & reliability metrics</CardDescription>
+          <div className="card-title">Site Health</div>
+          <div className="card-subtitle">Performance & reliability metrics</div>
         </div>
-        <CardAction>Details</CardAction>
-      </CardHeader>
-
-      <div className="grid grid-cols-2 gap-2 p-4 px-6 pb-6">
+        <button className="card-action">Details</button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, padding: "16px 24px 24px" }}>
         {siteHealthMetrics.map((m, i) => (
-          <div key={i} className="flex flex-col gap-1 p-4 transition-transform duration-150" style={{ background: "var(--color-sand-50)" }}>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.5px]" style={{ color: "var(--color-gray-400)" }}>
-              {m.label}
-            </span>
-            <span className="text-[22px] font-bold tracking-tight" style={{ fontFamily: "var(--font-display)", color: statusColor[m.status] }}>
-              {m.value}
-            </span>
-            <div className="h-[3px] mt-1 overflow-hidden" style={{ background: "var(--color-sand-200)" }}>
-              <div className="h-full transition-[width] duration-1000" style={{ width: `${barWidths[m.value] || 50}%`, background: statusColor[m.status] }} />
+          <div key={i} style={{ padding: 16, background: "var(--color-sand-50)", display: "flex", flexDirection: "column", gap: 4 }}>
+            <span style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--color-gray-400)" }}>{m.label}</span>
+            <span style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: statusColor[m.status] }}>{m.value}</span>
+            <div style={{ height: 3, background: "var(--color-sand-200)", marginTop: 4, overflow: "hidden" }}>
+              <div style={{ height: "100%", width: `${barWidths[m.value] || 50}%`, background: statusColor[m.status], transition: "width 1s ease" }} />
             </div>
           </div>
         ))}
       </div>
-    </Card>
+    </div>
   );
 }

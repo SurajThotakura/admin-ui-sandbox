@@ -1,7 +1,6 @@
 "use client";
 
 import { recentAlerts } from "../data/mockData";
-import { Card, CardHeader, CardTitle, CardDescription, CardAction } from "./ui/card";
 
 const dotColors = {
   warning: "var(--color-status-warning)",
@@ -12,37 +11,25 @@ const dotColors = {
 
 export default function RecentAlerts() {
   return (
-    <Card className="animate-slide-up opacity-0" style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}>
-      <CardHeader>
+    <div className="card" style={{ animation: "slideUp 0.5s ease forwards", animationDelay: "0.4s", opacity: 0 }}>
+      <div className="card-header">
         <div>
-          <CardTitle>Recent Alerts</CardTitle>
-          <CardDescription>Latest system notifications</CardDescription>
+          <div className="card-title">Recent Alerts</div>
+          <div className="card-subtitle">Latest system notifications</div>
         </div>
-        <CardAction>View all</CardAction>
-      </CardHeader>
-
-      <div className="flex flex-col gap-2 px-6 pb-6 pt-2">
+        <button className="card-action">View all</button>
+      </div>
+      <div style={{ padding: "8px 24px 24px", display: "flex", flexDirection: "column", gap: 8 }}>
         {recentAlerts.map((a) => (
-          <div
-            key={a.id}
-            className="flex gap-4 p-4 cursor-pointer transition-all duration-150"
-            style={{ background: "var(--color-sand-50)" }}
-          >
-            <div
-              className={`w-2 h-2 shrink-0 mt-[5px] ${a.type === "critical" ? "animate-pulse-glow" : ""}`}
-              style={{ background: dotColors[a.type] }}
-            />
-            <div className="flex-1 min-w-0">
-              <div className="text-[13px] leading-[1.4]" style={{ color: "var(--color-gray-700)" }}>
-                {a.message}
-              </div>
-              <div className="text-[11px] mt-0.5" style={{ color: "var(--color-gray-300)" }}>
-                {a.time}
-              </div>
+          <div key={a.id} style={{ display: "flex", gap: 16, padding: 16, background: "var(--color-sand-50)", cursor: "pointer", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
+            <div style={{ width: 8, height: 8, marginTop: 5, flexShrink: 0, background: dotColors[a.type], animation: a.type === "critical" ? "pulse-glow 1.5s ease-in-out infinite" : undefined }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 13, color: "var(--color-gray-700)", lineHeight: 1.4 }}>{a.message}</div>
+              <div style={{ fontSize: 11, color: "var(--color-gray-300)", marginTop: 2 }}>{a.time}</div>
             </div>
           </div>
         ))}
       </div>
-    </Card>
+    </div>
   );
 }

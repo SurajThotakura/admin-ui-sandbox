@@ -21,33 +21,24 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <div
-          className="min-h-screen relative"
-          style={{
-            background: `
-              repeating-linear-gradient(90deg, transparent, transparent 120px, rgba(212,199,176,0.07) 120px, rgba(212,199,176,0.07) 121px),
-              repeating-linear-gradient(0deg, transparent, transparent 240px, rgba(212,199,176,0.05) 240px, rgba(212,199,176,0.05) 241px),
-              linear-gradient(180deg, var(--color-sand-50) 0%, var(--color-sand-100) 100%)
-            `,
-          }}
-        >
+        <div className="app-wrapper">
           <Sidebar activePage={activePage} onNavigate={setActivePage} />
-          <main className="ml-[260px] min-h-screen">
+          <main className="main-content">
             <TopBar activePage={activePage} />
             {activePage === "dashboard" && <DashboardContent />}
             {activePage === "products" && <ProductsPage />}
             {activePage === "team" && (
-              <div className="p-12 animate-slide-up" style={{ animationFillMode: "forwards" }}>
+              <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
                 <p>Team management coming soon.</p>
               </div>
             )}
             {activePage === "notifications" && (
-              <div className="p-12 animate-slide-up" style={{ animationFillMode: "forwards" }}>
+              <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
                 <p>Notifications coming soon.</p>
               </div>
             )}
             {activePage === "settings" && (
-              <div className="p-12 animate-slide-up" style={{ animationFillMode: "forwards" }}>
+              <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
                 <p>Settings page content goes here.</p>
               </div>
             )}

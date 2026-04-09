@@ -29,51 +29,65 @@ export default function TopBar({ activePage }) {
   const info = pageInfo[activePage] || pageInfo.dashboard;
 
   return (
-    <header
-      className="flex items-center justify-between px-12 py-6 border-b-2 sticky top-0 z-50"
-      style={{
-        borderColor: "var(--color-sand-200)",
-        background: "rgba(253, 251, 247, 0.85)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-      }}
-    >
+    <header className="top-bar">
       <div>
         <h1
-          className="text-2xl font-bold tracking-tight leading-tight"
-          style={{ fontFamily: "var(--font-display)", color: "var(--color-gray-800)" }}
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 24,
+            fontWeight: 700,
+            color: "var(--color-gray-800)",
+            letterSpacing: "-0.3px",
+            lineHeight: 1.2,
+          }}
         >
           {info.title}
         </h1>
-        <p className="text-[13px] mt-0.5" style={{ color: "var(--color-gray-400)" }}>
+        <p style={{ fontSize: 13, color: "var(--color-gray-400)", marginTop: 2 }}>
           {info.subtitle}
         </p>
       </div>
-      <div className="flex items-center gap-4">
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <div
-          className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold"
           style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "6px 14px",
             background: "var(--color-status-good-bg)",
             color: "var(--color-status-good)",
+            fontSize: 12,
+            fontWeight: 600,
           }}
         >
           <span
-            className="w-[7px] h-[7px] animate-pulse-glow"
-            style={{ background: "var(--color-status-good)" }}
+            style={{
+              width: 7,
+              height: 7,
+              background: "var(--color-status-good)",
+              animation: "pulse-glow 2s ease-in-out infinite",
+            }}
           />
           All Systems Operational
         </div>
         {activePage === "dashboard" && (
           <button
-            className="flex items-center gap-2 px-3.5 py-[7px] text-[13px] font-medium border cursor-pointer transition-colors duration-150 hover:border-gray-300"
             style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "7px 14px",
               background: "white",
-              borderColor: "var(--color-sand-200)",
+              border: "1px solid var(--color-sand-200)",
+              fontSize: 13,
+              fontWeight: 500,
               color: "var(--color-gray-600)",
+              cursor: "pointer",
               fontFamily: "var(--font-body)",
+              transition: "border-color 0.15s",
             }}
           >
-            <CalendarDays className="w-[15px] h-[15px] opacity-50" />
+            <CalendarDays style={{ width: 15, height: 15, opacity: 0.5 }} />
             Last 7 days
           </button>
         )}
