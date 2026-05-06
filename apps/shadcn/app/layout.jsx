@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import "./globals.css";
+import Auth0ProviderWrapper from "../components/Auth0ProviderWrapper";
 import Sidebar from "../components/Sidebar";
 import TopBar from "../components/TopBar";
 import DashboardContent from "../components/DashboardContent";
@@ -21,29 +22,31 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <div className="app-wrapper">
-          <Sidebar activePage={activePage} onNavigate={setActivePage} />
-          <main className="main-content">
-            <TopBar activePage={activePage} />
-            {activePage === "dashboard" && <DashboardContent />}
-            {activePage === "products" && <ProductsPage />}
-            {activePage === "team" && (
-              <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
-                <p>Team management coming soon.</p>
-              </div>
-            )}
-            {activePage === "notifications" && (
-              <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
-                <p>Notifications coming soon.</p>
-              </div>
-            )}
-            {activePage === "settings" && (
-              <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
-                <p>Settings page content goes here.</p>
-              </div>
-            )}
-          </main>
-        </div>
+        <Auth0ProviderWrapper>
+          <div className="app-wrapper">
+            <Sidebar activePage={activePage} onNavigate={setActivePage} />
+            <main className="main-content">
+              <TopBar activePage={activePage} />
+              {activePage === "dashboard" && <DashboardContent />}
+              {activePage === "products" && <ProductsPage />}
+              {activePage === "team" && (
+                <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
+                  <p>Team management coming soon.</p>
+                </div>
+              )}
+              {activePage === "notifications" && (
+                <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
+                  <p>Notifications coming soon.</p>
+                </div>
+              )}
+              {activePage === "settings" && (
+                <div style={{ padding: 48, animation: "slideUp 0.4s ease forwards" }}>
+                  <p>Settings page content goes here.</p>
+                </div>
+              )}
+            </main>
+          </div>
+        </Auth0ProviderWrapper>
       </body>
     </html>
   );
