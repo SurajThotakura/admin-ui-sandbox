@@ -9,14 +9,12 @@ The design system is sharp corners, flat surfaces, bright palette to throw off t
 
 ## Quick Start
 
+Each app is self-contained — `cd` into the one you want and run it directly:
+
 ```bash
-pnpm install
-
-pnpm dev:react    # :5173  — Vite + React + CSS
-pnpm dev:nextjs   # :3000  — Next.js + Tailwind v4
-pnpm dev:shadcn   # :3001  — Next.js + shadcn/ui
-
-pnpm build        # all 3
+cd apps/react-spa && pnpm install && pnpm dev    # :5173
+cd apps/nextjs && pnpm install && pnpm dev       # :3000
+cd apps/shadcn && pnpm install && pnpm dev       # :3001
 ```
 
 ## What This Is
@@ -58,10 +56,10 @@ Agents must derive every design rule from code. This is test the agent's ability
 
 ### Procedure
 
-1. `pnpm dev:*` — verify baseline
+1. `cd apps/<app> && pnpm dev` — verify baseline
 2. Run your AI agent and ask it to implement your UI components. Use `SKILL.md` files created for your specific UI components for best results. 
 3. Evaluate: visual correctness, code quality, design system adherence
-4. `pnpm build:*` — confirm no regressions
+4. `cd apps/<app> && pnpm build` — confirm no regressions
 
 ## Feature Parity
 
@@ -74,18 +72,20 @@ All 3 apps implement:
 
 ```
 admin-sandbox/
-├── package.json / pnpm-workspace.yaml
 ├── README.md              ← you are here (operators only)
 ├── AGENTS.md              ← agent-safe context
 ├── CLAUDE.md              ← pointer → AGENTS.md
 ├── apps/
-│   ├── react-spa/         Vite + React + CSS
+│   ├── react-spa/         Vite + React + CSS (self-contained)
+│   │   ├── package.json
 │   │   ├── AGENTS.md
 │   │   └── src/styles.css ← design token source of truth
-│   ├── nextjs/            Next.js + Tailwind v4
+│   ├── nextjs/            Next.js + Tailwind v4 (self-contained)
+│   │   ├── package.json
 │   │   ├── AGENTS.md
 │   │   └── app/globals.css
-│   └── shadcn/            Next.js + shadcn/ui
+│   └── shadcn/            Next.js + shadcn/ui (self-contained)
+│       ├── package.json
 │       ├── AGENTS.md
 │       ├── components/ui/ ← themed primitives
 │       └── app/globals.css
