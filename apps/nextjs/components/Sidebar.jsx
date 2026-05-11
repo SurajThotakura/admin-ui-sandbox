@@ -1,11 +1,14 @@
 "use client";
 
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   LayoutDashboard,
   Package,
   Settings,
   Users,
   Bell,
+  LogIn,
+  LogOut,
 } from "lucide-react";
 
 const navItems = [
@@ -20,6 +23,12 @@ const navItems = [
 ];
 
 export default function Sidebar({ activePage, onNavigate }) {
+  const { isAuthenticated, isLoading, user, loginWithRedirect, logout } = useAuth0();
+
+  const initials = user?.name
+    ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
+    : "?";
+
   return (
     <aside className="sidebar">
       {/* Stripe overlay */}
@@ -183,38 +192,98 @@ export default function Sidebar({ activePage, onNavigate }) {
           borderTop: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        <div
-          style={{
-            width: 34,
-            height: 34,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgba(255,255,255,0.12)",
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            fontSize: 13,
-            color: "var(--color-accent)",
-            flexShrink: 0,
-          }}
-        >
-          JD
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-          <span
+        {isLoading ? (
+          <span style={{ fontSize: 12, opacity: 0.5 }}>Loading...</span>
+        ) : isAuthenticated && user ? (
+          <>
+            {user.picture ? (
+              <img
+                src={user.picture}
+                alt={user.name || "User"}
+                style={{
+                  width: 34,
+                  height: 34,
+                  objectFit: "cover",
+                  flexShrink: 0,
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: 34,
+                  height: 34,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "rgba(255,255,255,0.12)",
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  color: "var(--color-accent)",
+                  flexShrink: 0,
+                }}
+              >
+                {initials}
+              </div>
+            )}
+            <div style={{ display: "flex", flexDirection: "column", minWidth: 0, flex: 1 }}>
+              <span
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: "white",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {user.name || "User"}
+              </span>
+              <span style={{ fontSize: 11, opacity: 0.45 }}>{user.email}</span>
+            </div>
+            <button
+              onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+              title="Log out"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "rgba(255,255,255,0.5)",
+                padding: 4,
+                display: "flex",
+                alignItems: "center",
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "white"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.5)"; }}
+            >
+              <LogOut style={{ width: 16, height: 16 }} />
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => loginWithRedirect()}
             style={{
-              fontSize: 13,
-              fontWeight: 600,
-              color: "white",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              width: "100%",
+              padding: "8px 0",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "rgba(255,255,255,0.65)",
+              fontSize: 14,
+              fontWeight: 500,
+              fontFamily: "var(--font-body)",
             }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "white"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.65)"; }}
           >
-            Jane Doe
-          </span>
-          <span style={{ fontSize: 11, opacity: 0.45 }}>jane@acme.io</span>
-        </div>
+            <LogIn style={{ width: 18, height: 18 }} />
+            Sign in
+          </button>
+        )}
       </div>
     </aside>
   );

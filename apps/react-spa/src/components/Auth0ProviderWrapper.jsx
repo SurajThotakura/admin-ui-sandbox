@@ -1,5 +1,3 @@
-"use client";
-
 import { Auth0Provider } from "@auth0/auth0-react";
 
 function ConfigErrorScreen() {
@@ -13,9 +11,9 @@ function ConfigErrorScreen() {
           Please set up your Auth0 tenant and add the required environment variables.
         </p>
         <div className="auth-error-steps">
-          <p className="auth-error-steps-title">Required <code>.env.local</code> variables:</p>
-          <code className="auth-error-code">NEXT_PUBLIC_AUTH0_DOMAIN=your-tenant.auth0.com</code>
-          <code className="auth-error-code">NEXT_PUBLIC_AUTH0_CLIENT_ID=your-client-id</code>
+          <p className="auth-error-steps-title">Required <code>.env</code> variables:</p>
+          <code className="auth-error-code">VITE_AUTH0_DOMAIN=your-tenant.auth0.com</code>
+          <code className="auth-error-code">VITE_AUTH0_CLIENT_ID=your-client-id</code>
         </div>
         <a
           href="https://auth0.com/docs/get-started"
@@ -31,8 +29,8 @@ function ConfigErrorScreen() {
 }
 
 export default function Auth0ProviderWrapper({ children }) {
-  const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
-  const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
+  const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+  const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
   if (!domain || !clientId) {
     return <ConfigErrorScreen />;
@@ -43,7 +41,7 @@ export default function Auth0ProviderWrapper({ children }) {
       domain={domain}
       clientId={clientId}
       authorizationParams={{
-        redirect_uri: typeof window !== "undefined" ? window.location.origin : undefined,
+        redirect_uri: window.location.origin,
       }}
     >
       {children}

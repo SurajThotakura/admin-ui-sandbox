@@ -301,6 +301,53 @@ body {
   opacity: 0.45;
 }
 
+.sidebar-avatar-img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sidebar-logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.sidebar-logout-btn:hover {
+  color: white;
+}
+
+.sidebar-login-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-body);
+}
+
+.sidebar-login-btn:hover {
+  color: white;
+}
+
+.sidebar-loading {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
 /* ---- Main Content ---- */
 .main-content {
   margin-left: 260px;
@@ -1847,4 +1894,178 @@ body {
 
 .pp-form-textarea::placeholder {
   color: var(--gray-300);
+}
+
+/* =============================================
+   AUTH SCREENS
+   ============================================= */
+
+.auth-error-screen,
+.auth-login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 120px,
+      rgba(212, 199, 176, 0.07) 120px,
+      rgba(212, 199, 176, 0.07) 121px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 240px,
+      rgba(212, 199, 176, 0.05) 240px,
+      rgba(212, 199, 176, 0.05) 241px
+    ),
+    linear-gradient(180deg, var(--sand-50) 0%, var(--sand-100) 100%);
+  padding: var(--space-lg);
+}
+
+.auth-error-card,
+.auth-login-card {
+  background: white;
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2xl);
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  animation: slideUp 0.4s ease forwards;
+}
+
+.auth-error-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--status-critical-bg);
+  color: var(--status-critical);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.auth-error-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gray-800);
+  letter-spacing: -0.3px;
+  margin-bottom: var(--space-sm);
+}
+
+.auth-error-message {
+  font-size: 14px;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.auth-error-steps {
+  background: var(--sand-50);
+  border: 1px solid var(--sand-200);
+  padding: var(--space-md);
+  text-align: left;
+  margin-bottom: var(--space-lg);
+}
+
+.auth-error-steps-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-500);
+  margin-bottom: var(--space-sm);
+}
+
+.auth-error-code {
+  display: block;
+  font-size: 13px;
+  font-family: monospace;
+  color: var(--gray-700);
+  padding: 4px 0;
+}
+
+.auth-error-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.auth-error-link:hover {
+  text-decoration: underline;
+}
+
+/* Login screen */
+.auth-login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.auth-login-logo-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.auth-login-logo-text span:first-child {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--gray-800);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.auth-login-logo-text span:last-child {
+  font-size: 11px;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+}
+
+.auth-login-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gray-800);
+  letter-spacing: -0.3px;
+  margin-bottom: var(--space-sm);
+}
+
+.auth-login-message {
+  font-size: 14px;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.auth-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.auth-login-btn:hover {
+  background: var(--primary-deep);
 }
